@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>localStorage</h1>
+    <label>Digite seu nome:</label>
+    <input type="text" id="nome">
+    <button onclick="salvarNome()">Salvar Nome</button>
+    <div>
+        <p id="msg">
+            Olá <span id="nomeUsuario">Usuário</span>, seja bem-vindo!
+        </p>
+    </div>
+    <div>
+        <p>
+            Recarregue a página para ver se o nome foi salvo no localStorage.
+        </p>
+    </div>
+    <button onclick="recarregarPagina()">Recarregar</button>
+
+    <div>
+        <p>
+            Aperte o botão para limpar o localStorage.
+        </p>
+    </div>
+    <button onclick="limparLocalStorage()">Limpar</button>
+    <script>
+        function salvarNome(){
+            let nome = document.getElementById('nome').value;
+            localStorage.setItem('nomeUsuario', nome);
+            exibirMsg('Nome salvo com sucesso!');
+        }
+
+        function exibirMsg(mensagem){
+            let pMsg = document.getElementById('msg');
+            pMsg.textContent = mensagem;
+
+        }
+
+        function recarregarPagina(){
+            window.location.reload(true)
+        }
+
+        function limparLocalStorage(){
+            localStorage.clear();
+            exibirMsg('localStorage limpo! Coloque outro nome e salve novamente.');
+        }
+
+        window.onload = function(){
+            let nomeArmazenado = localStorage.getItem('nomeUsuario');
+            if (nomeArmazenado) {
+                exibirMsg(`Olá ${nomeArmazenado}, seu nome foi salvo e carregado do localStorage!`);
+            } else {
+                exibirMsg('Digite seu nome e clique em "Salvar Nome" para armazená-lo no localStorage.');
+            }
+        }
+    </script>
+</body>
+</html>
